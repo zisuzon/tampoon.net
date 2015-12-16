@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-sudo chmod -R 777 /Users/art/Documents/tampoon.net/{csv,pdf,htmTemplates}
+sudo chmod -R 777 /home/ubuntu/tampoon/{csv,pdf,htmTemplates}
