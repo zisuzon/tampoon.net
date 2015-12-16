@@ -105,11 +105,12 @@ class DatabaseManager implements IC
     }
 
     /**
+     * @param bool $p1_display_only_available
      * @return \Generator
      */
-    public function fetchTampoonInfos()
+    public function fetchTampoonInfos($p1_display_only_available = TRUE)
     {
-        $result = $this->sqli->query('SELECT * FROM tbl_tampoons');
+        $result = $this->sqli->query('SELECT * FROM tbl_tampoons '.(($p1_display_only_available) ? 'WHERE quantity > 0' : ''));
 
         if(is_object($result))
         {
