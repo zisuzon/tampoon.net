@@ -130,7 +130,6 @@ class DatabaseManager implements IC
      */
     public function saveOrder(array $p1_datas_post, $p2_filesSaved)
     {
-
         $queryOne = 'INSERT INTO tbl_orders
                     SET id_customer = (SELECT id FROM tbl_customers WHERE tbl_customers.email ="'.$this->sqli->real_escape_string($p1_datas_post['clientEmail']).'"),
                     date_order = "'.$this->dateOrder.'",
@@ -143,16 +142,19 @@ class DatabaseManager implements IC
         {
             $insertIdQueryOne = $this->sqli->insert_id;
 
+            $onlyTampoonInfos = [];
+
             foreach($p1_datas_post as $k => $v):
 
                 if(!empty($v) && !in_array($k, ['password', 'clientEmail', 'quantityTampoon', 'total', ]))
                 {
+                    $tampoonRef = strtr($k, '_', ' ');
+                    $onlyTampoonInfos[$tampoonRef] = $v;
 
                     $queryTwo = 'INSERT INTO tbl_orders_details
                                   SET id_order = '.$insertIdQueryOne.',
-                                    id_tampoon = (SELECT id FROM tbl_tampoons WHERE tbl_tampoons.reference = "'.strtr($k, '_', ' ').'"),
+                                    id_tampoon = (SELECT id FROM tbl_tampoons WHERE tbl_tampoons.reference = "'.$tampoonRef.'"),
                                     quantity = '.(int)$v;
-                    echo $queryTwo;
 
                     $resultTwo = $this->sqli->query($queryTwo);
 
@@ -161,9 +163,32 @@ class DatabaseManager implements IC
 
             endforeach;
 
-            return TRUE;
+            return $this->updateTampoonQuantities($onlyTampoonInfos);
 
         }else return $this->sqli->error;
 
+    }
+    
+    /**
+     * @param array $p1_tampoon_infos
+     * @return bool|string
+     */
+    public function updateTampoonQuantities(array $p1_tampoon_infos)
+    {
+        foreach($p1_tampoon_infos as $k => $v):
+
+            $query = 'UPDATE tbl_tampoons AS tp1 INNER JOIN tbl_tampoons AS tp2 ON tp1.reference = tp2.reference AND tp1.reference ="'.$k.'" SET tp1.quantity = (tp2.quantity - '.(int)$v.')';
+
+            $result = $this->sqli->query($query);
+
+            if($result){
+
+                mysqli_free_result($result); //don't remove this line
+
+            }else return $this->sqli->error;
+
+        endforeach;
+
+        return TRUE;
     }
 }
