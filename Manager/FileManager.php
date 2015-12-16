@@ -88,7 +88,7 @@ class FileManager implements IC
 
         $htmlOutput = '<div id="order_details"><h1>Bon de commande</h1><br>Total Tampoon '.$p1_datas_post['quantityTampoon'];
         $htmlOutput .= '<br>Total h.t., franco de port: '.$p1_datas_post['total'].' '.IC::CURRENCY[0];
-        $htmlOutput .= '<br>Date: <b>'.date('Y-m-d').'</b>';
+        $htmlOutput .= '<br>Date: <b>'.$this->date.'</b>';
         $htmlOutput .= '<br>CLIENT: <b>'.$p1_datas_post['clientEmail'].'</b></div>';
         $htmlOutput .= '<div id="icons">'.PHP_EOL.'<table>';
 
