@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /Users/art/Documents/tampoon.net
+    destination: /home/ubuntu/tampoon
 permissions:
-  - object: /Users/art/Documents/tampoon.net
+  - object: /home/ubuntu/tampoon
     pattern: "**"
     owner: www-data
     group: www-data
