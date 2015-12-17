@@ -129,6 +129,7 @@ function fillAllWith1Q()
 
     for(var i = 0; i < inputs.length; i++)
     {
+        document.getElementById('container_'+inputs[i].name).style.cssText = 'border: none;';
         inputs[i].value = 1;
     }
 
@@ -145,6 +146,7 @@ function fill50ValWithXQ(p1_which_quantity)
 
     for(var i = 0; i < inputs.length; i++)
     {
+        document.getElementById('container_'+inputs[i].name).style.cssText = 'border: none;';
         inputs_name.push(inputs[i].name);
     }
 
@@ -153,6 +155,8 @@ function fill50ValWithXQ(p1_which_quantity)
     for(var prop in array_random)
     {
         document.getElementById(inputs_name[array_random[prop]]).value = p1_which_quantity;
+        document.getElementById('container_'+inputs_name[array_random[prop]]).style.cssText = 'border: 2px solid cornflowerblue;border-radius: 3px;padding: 5px;';
+
     }
 
     makeSum();
@@ -198,7 +202,7 @@ function fillXQuantitiesWithXItems(p1_which_quantity, p2_differents_items)
                         for(var prop in array_random)
                         {
                             document.getElementById(availableTampoons[array_random[prop]]).value = p1_q;
-                            document.getElementById('container_'+availableTampoons[array_random[prop]]).style.cssText = 'border: 2px solid green;border-radius: 3px;padding: 5px;';
+                            document.getElementById('container_'+availableTampoons[array_random[prop]]).style.cssText = 'border: 2px solid cornflowerblue;border-radius: 3px;padding: 5px;';
                         }
 
                         makeSum();
@@ -222,8 +226,6 @@ function changePassword()
     document.getElementById('containerLinkAction').innerHTML = '...wait';
 
     var oData = new FormData(document.forms.namedItem('the_form'));
-
-    //oData.append('CustomField', 'This is some extra data');
 
     var oReq = new XMLHttpRequest();
 

@@ -32,10 +32,10 @@ require_once '../Model/InitConsts.php';
          </td>
          <td>
     <form style="float: left">
-    <select id="fillAction" onchange="if(this.value === 'all'){ fillAllWith1Q(); }else{ fill50ValWithXQ(parseInt(this.value)); }">
+    <select id="fillAction" onchange="if(this.value === 'all'){ fillAllWith1Q(); }else if(this.value == '1'){ fill50ValWithXQ(parseInt(this.value)); }else{ fillXQuantitiesWithXItems(1, 100); }">
         <option value="all">Fill all with 1</option>
         <option value="1">Fill 50 with 1</option>
-        <option value="2">Fill 50 with 2</option>
+        <option value="2">Fill 100 with 1</option>
     </select>
     </form>
          </td>
