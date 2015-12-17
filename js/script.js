@@ -181,13 +181,14 @@ function fillXQuantitiesWithXItems(p1_which_quantity, p2_differents_items)
 
                     for(var i = 0; i < inputs.length; i++)
                     {
+                        document.getElementById('container_'+inputs[i].name).style.cssText = 'border: none;';
+
                         if(inputs[i].max >= p1_q)
                         {
                             //console.log(inputs[i].id+' : '+inputs[i].max);
                             availableTampoons.push(inputs[i].name);
                         }
                     }
-
                     //console.log(availableTampoons.length+' >= '+p2_diff_items);
 
                     if(availableTampoons.length >= p2_diff_items)
@@ -202,7 +203,10 @@ function fillXQuantitiesWithXItems(p1_which_quantity, p2_differents_items)
 
                         makeSum();
 
-                    }else{ alert('There are not sufficient different items for such quantities! Try with less'); }
+                    }else {
+
+                        alert('There are not sufficient different items for such quantities! Try with less');
+                    }
 
                 }else{ alert('Max of items is '+numInputs); }
 
