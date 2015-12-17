@@ -67,7 +67,7 @@ $outputDBM = $dbm->fetchTampoonInfos();
         echo '<tr><td>'.$rows['reference'].'</td></tr>';
         echo '<tr><td>';
         echo '<input placeholder="'.$rows['quantity'].'" type="number" min="0" max="'.$rows['quantity'].'" id="'.$rows['reference'].'" name="'.$rows['reference'].'" onclick="makeSum();" ';
-        echo 'onchange="if(this.value == 0) this.style.cssText=none;" onfocus="if(document.getElementById(\'checkvalues\').style.visibility === \'visible\') document.getElementById(\'checkvalues\').style.visibility = \'hidden\';"/>';
+         echo 'onchange="if(this.value == 0) document.getElementById(\'container_'.$rows['reference'].'\').style.cssText=\'border: none;\';" onfocus="if(document.getElementById(\'checkvalues\').style.visibility === \'visible\') document.getElementById(\'checkvalues\').style.visibility = \'hidden\';"/>';
         echo '&nbsp;dispo</td></tr>';
         echo '</table></div>';
 
