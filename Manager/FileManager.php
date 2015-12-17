@@ -113,19 +113,17 @@ class FileManager implements IC
                 {
                     $htmlOutput .= '<tr><td><img src="../icon/'.$reference.'.jpg" style="width: 25px;"></td><td>'.$reference.'</td><td>'.$v.'</td>'.PHP_EOL;
 
-                }else{
-
-                    //echo '<br>'.$i;
-                    $htmlOutput .= '<td><img src="../icon/'.$reference.'.jpg" style="width: 25px;"></td><td>'.$reference.'</td><td>'.$v.'</td>'.PHP_EOL;
-
-                }
-
+                }else $htmlOutput .= '<td><img src="../icon/'.$reference.'.jpg" style="width: 25px;"></td><td>'.$reference.'</td><td>'.$v.'</td>'.PHP_EOL;
 
             }
 
         endforeach;
 
-        $htmlOutput .= '</table></div></div></div></body></html>';
+        if(FALSE !== stripos(substr($htmlOutput, strlen($htmlOutput) -5), 'tr'))
+        {
+            $htmlOutput .= '</table></div></div></body></html>';
+
+        }else $htmlOutput .= '</tr></table></div></div></body></html>';
 
         $tmp = microtime(TRUE);
 
@@ -150,5 +148,4 @@ class FileManager implements IC
 
         }else return 'PDF could not be saved!';
     }
-
 }

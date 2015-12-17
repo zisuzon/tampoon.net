@@ -11,40 +11,10 @@ require_once '../Model/InitConsts.php';
     <meta charset="UTF-8">
     <title>Tampoon</title>
     <meta name="description" content="Tampoon" />
-    <style>
-        *{ margin: 0; padding: 0;}
-
-        html, body{
-            width: 100%;
-            height: 100%;
-        }
-
-        body{ font-family: arial, sans-serif; font-size: 12px; }
-
-        .icon{ width: 50px; height: 50px; text-align: center;}
-
-#infos{ font-size: 18px; display: none; padding: 5px; color: white; width: 150px; height: 80px; /*position: fixed;*/ background-color: black; opacity: 0.8; border-radius: 5px; /*left: 80%; top: 10px;*/ text-align: center; }
-
-#checkvalues{ position: fixed; left: 20%; font-weight: bold; font-size: 18px; visibility: hidden; padding: 15px; color: white; width: 600px; height: 95%; background-color: black; opacity: 0.9; border-radius: 5px; top: 10px; text-align: center; }
-
-#return_from_checkvalues{ overflow: auto; height: 90%; }
-
-#btnClose{ width: 26px; height: 26px; border-radius: 13px; background-color: white; cursor: pointer; color: black; }
-
-#top{ text-align: center; width: 700px; margin-left: auto; margin-right: auto; }
-
-a{ text-decoration: none; color: cornflowerblue; font-family: arial, sans-serif;}
-
-p{ margin-top: 10px; margin-bottom: 10px; }
-
-.container_icon{  display: inline-block; margin: 15px; }
-
-.bigInput{ width: 300px; height: 35px; font-weight: bold; font-size: 25px; border-radius: 7px; }
-
-</style>
     <?php
     echo '<script>'.PHP_EOL.'var tampoonFirstRate = '.IC::TAMPOON_FIRST_RATE.';'.PHP_EOL.'var tampoonSecondRate = '.IC::TAMPOON_SECOND_RATE.';'.PHP_EOL.'var minimumQuantityOrder = '.IC::MINIMUM_Q_ORDER.';'.PHP_EOL.'var currency = "'.IC::CURRENCY[0].'";'.PHP_EOL.'</script>';
     ?>
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
 <script type="text/javascript" src="../js/script.js"></script>
 </head>
 <body>
@@ -96,9 +66,9 @@ $outputDBM = $dbm->fetchTampoonInfos();
         echo '<div class="container_icon"><table><tr><td><img class="icon" src="'.$icon.'" /></td></tr>';
         echo '<tr><td>'.$rows['reference'].'</td></tr>';
         echo '<tr><td>';
-        echo '<input placeholder="'.(($rows['quantity'] > 0) ? $rows['quantity'] : 0).' dispo" type="text" style="width: 50px; margin-left: 5px;" id="'.$rows['reference'].'" name="'.$rows['reference'].'" onkeyup="makeSum();"';
+        echo '<input value="0" type="number" min="0" max="'.$rows['quantity'].'" id="'.$rows['reference'].'" name="'.$rows['reference'].'" onclick="makeSum();" ';
         echo ' onfocus="if(document.getElementById(\'checkvalues\').style.visibility === \'visible\') document.getElementById(\'checkvalues\').style.visibility = \'hidden\';"/>';
-        echo '</td></tr>';
+        echo '&nbsp;dispo</td></tr>';
         echo '</table></div>';
 
     endforeach;
