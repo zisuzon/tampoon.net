@@ -39,7 +39,7 @@ require_once '../Model/InitConsts.php';
     </select>
     </form>
          </td>
-         <td> | <input type="text" id="num_items" placeholder="Items" style="width: 50px;"> with <input type="text" id="quantity" placeholder="Quantity" style="width: 50px;">
+         <td> | <input type="text" id="num_items" placeholder="Differents Items" style="width: 100px;"> with <input type="text" id="quantity" placeholder="Quantity" style="width: 50px;">
              </td>
          <td rowspan="2">
             <a href="#" onclick="fillXQuantitiesWithXItems(document.getElementById('quantity').value, document.getElementById('num_items').value);">Fill Your Values</a>
@@ -63,7 +63,7 @@ $outputDBM = $dbm->fetchTampoonInfos();
 
         $icon = '../icon'.IC::DS.$rows['reference'].'.jpg';
 
-        echo '<div class="container_icon"><table><tr><td><img class="icon" src="'.$icon.'" /></td></tr>';
+        echo '<div class="container_icon" id="container_'.$rows['reference'].'"><table><tr><td><img class="icon" src="'.$icon.'" /></td></tr>';
         echo '<tr><td>'.$rows['reference'].'</td></tr>';
         echo '<tr><td>';
         echo '<input value="0" type="number" min="0" max="'.$rows['quantity'].'" id="'.$rows['reference'].'" name="'.$rows['reference'].'" onclick="makeSum();" ';

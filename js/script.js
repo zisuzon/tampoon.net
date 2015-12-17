@@ -158,18 +158,16 @@ function fill50ValWithXQ(p1_which_quantity)
     makeSum();
 }
 
-function fillXQuantitiesWithXItems(p1_which_quantity, p2_which_items)
+function fillXQuantitiesWithXItems(p1_which_quantity, p2_differents_items)
 {
-    if(p1_which_quantity != '' && p2_which_items != '')
+    if(p1_which_quantity != '' && p2_differents_items != '')
     {
-
         var p1_q = parseInt(p1_which_quantity);
-        var p2_item = parseInt(p2_which_items);
+        var p2_diff_items = parseInt(p2_differents_items);
 
-        if(p1_q != 0 && p2_item != 0)
+        if(p1_q != 0 && p2_diff_items != 0)
         {
-
-            if(p2_which_items > 1)
+            if(p2_diff_items > 1)
             {
                 clearAllInputsValues();
 
@@ -177,31 +175,40 @@ function fillXQuantitiesWithXItems(p1_which_quantity, p2_which_items)
 
                 var numInputs = inputs.length;
 
-                if(p2_item <= numInputs)
+                if(p2_diff_items <= numInputs)
                 {
-                    var inputs_name = [];
+                    var availableTampoons = [];
 
-                    for(var i = 0; i < numInputs; i++)
+                    for(var i = 0; i < inputs.length; i++)
                     {
-                        inputs_name.push(inputs[i].name);
+                        if(inputs[i].max >= p1_q)
+                        {
+                            //console.log(inputs[i].id+' : '+inputs[i].max);
+                            availableTampoons.push(inputs[i].name);
+                        }
                     }
 
-                    var array_random = array_rand(inputs_name, p2_item);
+                    //console.log(availableTampoons.length+' >= '+p2_diff_items);
 
-                    for(var prop in array_random)
+                    if(availableTampoons.length >= p2_diff_items)
                     {
-                        document.getElementById(inputs_name[array_random[prop]]).value = p1_q;
-                    }
+                        var array_random = array_rand(availableTampoons, p2_diff_items);
 
-                    makeSum();
+                        for(var prop in array_random)
+                        {
+                            document.getElementById(availableTampoons[array_random[prop]]).value = p1_q;
+                            document.getElementById('container_'+availableTampoons[array_random[prop]]).style.cssText = 'border: 2px solid green;border-radius: 3px;padding: 5px;';
+                        }
+
+                        makeSum();
+
+                    }else{ alert('There are not sufficient different items for such quantities! Try with less'); }
 
                 }else{ alert('Max of items is '+numInputs); }
 
             }else{ alert('You must choose at least 2 differents items!'); }
-
         }
     }
-
 }
 
 function changePassword()
@@ -242,7 +249,6 @@ function changePassword()
 
     oReq.send(oData);
 }
-
 
 function array_rand(input, num_req) {
     //  discuss at: http://phpjs.org/functions/array_rand/
