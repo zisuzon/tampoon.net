@@ -66,8 +66,8 @@ $outputDBM = $dbm->fetchTampoonInfos();
         echo '<div class="container_icon" id="container_'.$rows['reference'].'"><table><tr><td><img class="icon" src="'.$icon.'" /></td></tr>';
         echo '<tr><td>'.$rows['reference'].'</td></tr>';
         echo '<tr><td>';
-        echo '<input value="0" type="number" min="0" max="'.$rows['quantity'].'" id="'.$rows['reference'].'" name="'.$rows['reference'].'" onclick="makeSum();" ';
-        echo ' onfocus="if(document.getElementById(\'checkvalues\').style.visibility === \'visible\') document.getElementById(\'checkvalues\').style.visibility = \'hidden\';"/>';
+        echo '<input placeholder="'.$rows['quantity'].'" type="number" min="0" max="'.$rows['quantity'].'" id="'.$rows['reference'].'" name="'.$rows['reference'].'" onclick="makeSum();" ';
+        echo 'onchange="if(this.value == 0) this.style.cssText=none;" onfocus="if(document.getElementById(\'checkvalues\').style.visibility === \'visible\') document.getElementById(\'checkvalues\').style.visibility = \'hidden\';"/>';
         echo '&nbsp;dispo</td></tr>';
         echo '</table></div>';
 
